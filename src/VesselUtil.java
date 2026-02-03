@@ -32,4 +32,31 @@ public class VesselUtil {
 
         return null; // if vessel not found
     }
+    public List<Vessel> getHighPerformanceVessels() {
+
+        List<Vessel> highPerformanceList = new ArrayList<>();
+
+        if (vesselList.isEmpty()) {
+            return highPerformanceList;
+        }
+
+        double maxSpeed = vesselList.get(0).getAverageSpeed();
+
+        // Step 1: find maximum speed
+        for (Vessel vessel : vesselList) {
+            if (vessel.getAverageSpeed() > maxSpeed) {
+                maxSpeed = vessel.getAverageSpeed();
+            }
+        }
+
+        // Step 2: collect vessels with maximum speed
+        for (Vessel vessel : vesselList) {
+            if (vessel.getAverageSpeed() == maxSpeed) {
+                highPerformanceList.add(vessel);
+            }
+        }
+
+        return highPerformanceList;
+    }
+
 }
